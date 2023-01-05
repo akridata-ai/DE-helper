@@ -1,9 +1,10 @@
 """
-Create a mock catalog as an example of Bring-Your-Own-Featurizer
+Create a catalog (csv file) as an example of Bring-Your-Own-Featurizer
 
-Generate a csv file, following the format in
+CSV format file can be found in:
 https://docs.akridata.ai/docs/prep-external-features
-<path to file>,<file index>,<features>
+and is expected to be:
+<path to file name>,<file index>,<features>
 
 Notes
  - file index is always 0 for images
@@ -24,7 +25,7 @@ def update_csv(path_csv: str, line: str):
 
 
 def add_comma(input_string: str) -> str:
-    """Add comma to teh string"""
+    """Add comma to the string"""
     return input_string + ","
 
 
@@ -47,7 +48,7 @@ def process_files(path_csv: str, list_files: list, feature_size: int):
         # the mock (random) values as feature values:
         val = np.random.rand(feature_size)
 
-        # the line for the current file: file name, image index, feature values
+        # the line for the current file: file name, image index (0 for images), feature values
         line = \
             add_comma(current_file) + \
             add_comma("0") + \
@@ -62,7 +63,7 @@ def process_files(path_csv: str, list_files: list, feature_size: int):
 
 def get_params() -> typ.Tuple[str, str, int]:
     # where the images are:
-    path_images: str = ""
+    path_images: str = ""  # ADD PATH HERE
 
     # where to create the csv file:
     path_csv: str = "feature.csv"
@@ -102,14 +103,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# ./adectl run -d e4d2a904-8308-4d64-8db7-6f664fec2a45 -f /home/ubuntu/byo_feature/feature.csv
-
-# adectl run -n <dataset-name> -i <data-directory>
-# adectl run -n byo_featurizer -i <data-directory> -f
-
-# s3://compare-test-2022-11-16/byo_feature/data/100930342_92e8746431_n.jpg
-#                              byo_feature/data/100930342_92e8746431_n.jpg
-
-# s3a://jungo-client-de-poc/data/seat_belt_data_20221006/train/neg/all/video/2330/0001/seatbelt_right_fit_unfit_alina.mp4_0_17395502_.png
