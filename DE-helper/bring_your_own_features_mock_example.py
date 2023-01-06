@@ -1,5 +1,5 @@
 """
-Create a catalog (csv file) as an example of Bring-Your-Own-Featurizer
+Create a catalog (csv file) as an example of Bring-Your-Own-Features
 
 CSV format file can be found in:
 https://docs.akridata.ai/docs/prep-external-features
